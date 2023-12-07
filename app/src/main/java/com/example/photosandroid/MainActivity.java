@@ -1,5 +1,6 @@
 package com.example.photosandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Floating Action Button Click Listener
         findViewById(R.id.floatingActionButton).setOnClickListener(view -> showAlbumNameDialog());
+
+        listView.setOnItemClickListener(
+                (p,v,pos,id)->openAlbum(pos)
+        );
     }
 
 
@@ -84,4 +89,13 @@ public class MainActivity extends AppCompatActivity {
 
         builder.show();
     }
+
+
+private void openAlbum(int pos) {
+
+        Intent intent = new Intent(this, AlbumViewActivity.class);
+        intent.putExtra("album",myAlbums.get(pos));
+        startActivity(intent);
+}
+
 }
