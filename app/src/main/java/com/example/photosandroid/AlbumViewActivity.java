@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -44,16 +45,23 @@ public class AlbumViewActivity extends AppCompatActivity {
         albumNameView.setText(currAlbum.getName());
         //set add new photo action
         findViewById(R.id.addPhotoButton).setOnClickListener(view->addImage());
-        //set recyculer veiews data to the photo array
+        //set recycler views data to the photo array
 
         RecyclerView recyclerView = findViewById(imageList);
-        File file =new File("/storage/emulated/0/Download/images.jpeg");
 
-    currAlbum.addPhoto(new Photo(file));
-        adaptor = new ImageAdaptor(currAlbum.getPhotoList());
+
+
+        adaptor = new ImageAdaptor(currAlbum.getPhotoList(),new ClickListener(){
+        //set click listener for items in recycler view
+            @Override
+            public void click(int index) {
+                Toast.makeText(getBaseContext(),"item clicked",Toast.LENGTH_LONG).show();
+            }
+        });
 
         recyclerView.setAdapter(adaptor);
         recyclerView.setLayoutManager(new LinearLayoutManager(AlbumViewActivity.this));
+
     }
 
     private void addImage(){
