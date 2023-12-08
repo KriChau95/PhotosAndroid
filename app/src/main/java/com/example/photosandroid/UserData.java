@@ -23,6 +23,15 @@ public class UserData implements Serializable {
         return albumList;
     }
 
+    public boolean hasAlbum(String name){
+        for (Album a: albumList){
+            if (a.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addAlbum(Album a) {
         albumList.add(a);
     }

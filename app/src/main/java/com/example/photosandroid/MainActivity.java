@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(this, "data List Length: " + userData.getAlbumList().size(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "data List Length: " + userData.getAlbumList().size(), Toast.LENGTH_SHORT).show();
 
         for (Album a: myAlbums){
             System.out.println(a);
@@ -69,13 +69,16 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", (dialog, which) -> {
             String albumName = albumNameEditText.getText().toString();
 
-            // Add the album to the list and notify the adapter
-            Album toAdd = new Album(albumName);
-            //myAlbums.add(toAdd);
-            userData.addAlbum(toAdd);
-            UserData.store(userData, getApplicationContext());
-            albumList.add(albumName);
-            adapter.notifyDataSetChanged();
+            if (!userData.hasAlbum(albumName)){
+                // Add the album to the list and notify the adapter
+                Album toAdd = new Album(albumName);
+                //myAlbums.add(toAdd);
+                userData.addAlbum(toAdd);
+                UserData.store(userData, getApplicationContext());
+                albumList.add(albumName);
+                adapter.notifyDataSetChanged();
+            }
+
         });
 
         builder.setNegativeButton("Cancel", (dialog, which) -> {
