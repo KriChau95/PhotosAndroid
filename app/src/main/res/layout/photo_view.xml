@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".photoViewActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="4dp"
+        android:background="#00ff00"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:layout_editor_absoluteX="49dp">
+
+        <TextView
+            android:id="@+id/albumNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Album Name"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="321dp"
+        android:layout_height="406dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/captionView"
+        android:layout_width="359dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="100dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+
+
+        tools:layout_editor_absoluteY="718dp" />
+
+    <Button
+        android:id="@+id/changeAlbumButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Move"
+        tools:layout_editor_absoluteX="214dp"
+        tools:layout_editor_absoluteY="722dp" />
+
+    <Button
+        android:id="@+id/CaptionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="caption"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="722dp" />
+
+    <Button
+        android:id="@+id/TagsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Tags"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="721dp" />
+
+    <Button
+        android:id="@+id/leftButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="<-"
+
+        tools:layout_editor_absoluteX="109dp"
+        tools:layout_editor_absoluteY="496dp" />
+
+    <Button
+        android:id="@+id/rightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="->"
+
+        tools:layout_editor_absoluteX="240dp"
+        tools:layout_editor_absoluteY="496dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

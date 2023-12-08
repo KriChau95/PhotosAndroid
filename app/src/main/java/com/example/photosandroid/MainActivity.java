@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // Load existing user data
         userData = UserData.load(getApplicationContext());
 
+
         // Initialize the album list and adapter only if it's the first time
         if (albumList == null || albumList.isEmpty()) {
             albumList = new ArrayList<>();
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private void openAlbum(int pos) {
 
         Intent intent = new Intent(this, AlbumViewActivity.class);
-        intent.putExtra("album",myAlbums.get(pos));
+        intent.putExtra("album",userData.getAlbumList().get(pos));
         intent.putExtra("data",userData);
         startActivity(intent);
     }
