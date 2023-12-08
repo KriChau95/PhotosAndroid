@@ -1,5 +1,7 @@
 package com.example.photosandroid;
 
+
+
 import com.example.photosandroid.Photo;
 
 import java.io.Serializable;
@@ -22,7 +24,9 @@ public class Album implements Serializable{
     private Photo latestPhoto;
     private int currentIndex;
 
-
+    public ArrayList<Photo> getPhotos(){
+        return photoList;
+    }
     /**
      * Gets the current index within the album.
      *

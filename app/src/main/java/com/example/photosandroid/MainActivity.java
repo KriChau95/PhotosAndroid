@@ -1,5 +1,8 @@
 package com.example.photosandroid;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,8 @@ import android.widget.ListView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Toast.makeText(this, "data List Length: " + userData.getAlbumList().size(), Toast.LENGTH_SHORT).show();
 
-        for (Album a: myAlbums){
+        for (Album a : myAlbums) {
             System.out.println(a);
         }
 
@@ -53,9 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Floating Action Button Click Listener
         findViewById(R.id.floatingActionButton).setOnClickListener(view -> showAlbumNameDialog());
+
+        listView.setOnItemClickListener(
+                (p, v, pos, id) -> openAlbum(pos)
+        );
+
+
+
     }
-
-
     private void showAlbumNameDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Album Name");
@@ -87,4 +97,14 @@ public class MainActivity extends AppCompatActivity {
 
         builder.show();
     }
+
+
+    private void openAlbum(int pos) {
+
+        Intent intent = new Intent(this, AlbumViewActivity.class);
+        intent.putExtra("album",myAlbums.get(pos));
+        intent.putExtra("data",userData);
+        startActivity(intent);
+    }
+
 }

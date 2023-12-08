@@ -60,7 +60,7 @@ public class Photo implements Serializable{
         tagList = new ArrayList<Tag>();
         date = Calendar.getInstance();
         date.set(Calendar.MILLISECOND, 0);
-        imageFilePath = f.getPath();
+        imageFilePath = f.getAbsolutePath();
     }
 
     /**
@@ -68,6 +68,10 @@ public class Photo implements Serializable{
      *
      * @return The list of tags.
      */
+
+    public String getFilePath(){
+        return imageFilePath;
+    }
     public ArrayList<Tag> getTagList(){
         return tagList;
     }
