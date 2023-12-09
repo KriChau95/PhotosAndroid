@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="321dp"
-        android:layout_height="406dp"
+        android:layout_width="383dp"
+        android:layout_height="424dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
@@ -39,65 +39,83 @@
 
     <TextView
         android:id="@+id/captionView"
-        android:layout_width="359dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="376dp"
+        android:layout_height="114dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-
-
-        tools:layout_editor_absoluteY="718dp" />
-
-    <Button
-        android:id="@+id/changeAlbumButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Move"
-        tools:layout_editor_absoluteX="214dp"
-        tools:layout_editor_absoluteY="722dp" />
 
     <Button
         android:id="@+id/CaptionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
         android:text="caption"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="722dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/deleteButton" />
+
+    <Button
+        android:id="@+id/changeAlbumButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:text="Move"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/CaptionButton" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:text="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/TagsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="4dp"
         android:text="Edit Tags"
-        tools:layout_editor_absoluteX="302dp"
-        tools:layout_editor_absoluteY="721dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/changeAlbumButton" />
 
     <Button
         android:id="@+id/leftButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="<-"
+        android:layout_marginTop="35dp"
 
-        tools:layout_editor_absoluteX="109dp"
-        tools:layout_editor_absoluteY="496dp" />
+        android:text="previous"
+        app:layout_constraintBottom_toTopOf="@+id/CaptionButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/captionView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/rightButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="->"
+        android:layout_marginTop="35dp"
 
-        tools:layout_editor_absoluteX="240dp"
-        tools:layout_editor_absoluteY="496dp" />
+        android:layout_marginEnd="96dp"
+        android:text="next"
+        app:layout_constraintBottom_toTopOf="@+id/changeAlbumButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/captionView"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

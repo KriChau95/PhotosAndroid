@@ -55,7 +55,7 @@ public class AlbumViewActivity extends AppCompatActivity {
         //set click listener for items in recycler view
             @Override
             public void click(int index) {
-                Toast.makeText(getBaseContext(),"item clicked",Toast.LENGTH_LONG).show();
+                switchToPhotoView(index);
             }
         });
 
@@ -108,5 +108,12 @@ public class AlbumViewActivity extends AppCompatActivity {
         }
         // cursor.close();
         return null;
+    }
+    private void switchToPhotoView(int i){
+        Intent intent = new Intent(this,photoViewActivity.class);
+        intent.putExtra("album",currAlbum);
+        intent.putExtra("data",userData);
+        intent.putExtra("photo",currAlbum.getPhoto(i));
+        startActivity(intent);
     }
 }

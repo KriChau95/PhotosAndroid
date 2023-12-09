@@ -25,6 +25,11 @@
             android:parentActivityName="com.example.photosandroid.MainActivity"/>
 
         <activity
+            android:name=".photoViewActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.photosandroid.AlbumViewActivity"/>
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
