@@ -29,7 +29,9 @@ public class AlbumViewActivity extends AppCompatActivity {
     private Album currAlbum;
     private ImageAdaptor adaptor;
 
-    private UserData userData;
+    private  UserData userData;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +40,11 @@ public class AlbumViewActivity extends AppCompatActivity {
 
 
         //read in the current album
-        currAlbum = (Album) getIntent().getSerializableExtra("album");
-        userData = (UserData) getIntent().getSerializableExtra("data");
+        userData= UserData.getUserdata(getApplicationContext());
+
+
+            currAlbum = userData.getAlbumList().get((int) getIntent().getSerializableExtra("albumPos"));
+
         //set title for view
         TextView albumNameView = findViewById(albumNameTextView);
         albumNameView.setText(currAlbum.getName());
@@ -81,7 +86,7 @@ public class AlbumViewActivity extends AppCompatActivity {
     File file = new File(picturePath);
             currAlbum.addPhoto(new Photo(file));
 
-            UserData.store(userData,getApplicationContext());
+            UserData.store(getApplicationContext());
 
             adaptor.notifyItemInserted(currAlbum.getSize()-1);
 
@@ -111,9 +116,15 @@ public class AlbumViewActivity extends AppCompatActivity {
     }
     private void switchToPhotoView(int i){
         Intent intent = new Intent(this,photoViewActivity.class);
-        intent.putExtra("album",currAlbum);
-        intent.putExtra("data",userData);
-        intent.putExtra("photo",currAlbum.getPhoto(i));
+        intent.putExtra("albumPos",currAlbum.getCurrentIndex());
+
+        intent.putExtra("photoPos",i);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adaptor.notifyDataSetChanged();
     }
 }

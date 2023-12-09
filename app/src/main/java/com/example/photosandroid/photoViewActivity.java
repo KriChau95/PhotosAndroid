@@ -15,21 +15,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 
 public class photoViewActivity  extends AppCompatActivity {
-     UserData userData;
+     private  UserData userData;
      Album currAlbum;
      Photo currPhoto;
      
      ImageView imageView;
      
      TextView captionView;
+     private int currPhotoIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_view);
         //get data from previous activity
-        userData =(UserData) getIntent().getSerializableExtra("data");
-        currAlbum =(Album)getIntent().getSerializableExtra("album");
-        currPhoto=(Photo)getIntent().getSerializableExtra("photo");
+        userData= UserData.getUserdata(getApplicationContext());
+        currAlbum =(Album)userData.getAlbumList().get((int)getIntent().getSerializableExtra("albumPos"));
+        currPhoto=currAlbum.getPhoto((int)getIntent().getSerializableExtra("photoPos"));
         //declare changeable fields
         imageView=findViewById(R.id.imageView);
         captionView=findViewById(R.id.captionView);
@@ -63,8 +64,8 @@ public class photoViewActivity  extends AppCompatActivity {
     private void deletePhoto() {
         if(currAlbum.getSize()-1==0){
             currAlbum.getPhotos().remove(currPhoto);
+            UserData.store(getApplicationContext());
 
-            UserData.store(new UserData(),getApplicationContext());
             finish();
         }else{
             currAlbum.getPhotos().remove(currPhoto);
@@ -91,7 +92,7 @@ public class photoViewActivity  extends AppCompatActivity {
 
 
             currPhoto.setCaption(newCaption);
-            UserData.store(userData, getApplicationContext());
+            UserData.store( getApplicationContext());
             captionView.setText(newCaption);
 
         });

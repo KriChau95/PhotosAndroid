@@ -1,8 +1,8 @@
 package com.example.photosandroid;
 
-import android.Manifest;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,17 +14,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private UserData userData = new UserData();
+
     private ArrayList<String> albumList;
     private ArrayList<Album> myAlbums;
     private ArrayAdapter<String> adapter;
 
+    private  UserData userData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        // Load existing user data
-        userData = UserData.load(getApplicationContext());
-
+        userData= UserData.getUserdata(getApplicationContext());
 
         // Initialize the album list and adapter only if it's the first time
         if (albumList == null || albumList.isEmpty()) {
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             Album toAdd = new Album(albumName);
             //myAlbums.add(toAdd);
             userData.addAlbum(toAdd);
-            UserData.store(userData, getApplicationContext());
+            UserData.store( getApplicationContext());
             albumList.add(albumName);
             adapter.notifyDataSetChanged();
         });
@@ -100,8 +98,7 @@ public class MainActivity extends AppCompatActivity {
     private void openAlbum(int pos) {
 
         Intent intent = new Intent(this, AlbumViewActivity.class);
-        intent.putExtra("album",userData.getAlbumList().get(pos));
-        intent.putExtra("data",userData);
+        intent.putExtra("albumPos",pos);
         startActivity(intent);
     }
 
