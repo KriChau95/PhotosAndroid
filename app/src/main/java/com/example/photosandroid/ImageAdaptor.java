@@ -1,10 +1,7 @@
 package com.example.photosandroid;
 
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +17,9 @@ import java.util.ArrayList;
 
 public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder> {
     private ArrayList<Photo> localDataSet;
+
+
+    private ClickListener listener;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -45,8 +45,11 @@ public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder> 
     }
 
 
-    public ImageAdaptor(ArrayList<Photo> dataSet) {
+    public ImageAdaptor(ArrayList<Photo> dataSet,ClickListener listener) {
+
         localDataSet = dataSet;
+
+        this.listener =listener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -67,16 +70,24 @@ public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder> 
         // contents of the view with that element
         viewHolder.getTextView().setText(localDataSet.get(position).getCaption());
 
-    File file = new File(localDataSet.get(position).getFilePath());
+        File file = new File(localDataSet.get(position).getFilePath());
+        if(file.exists()) {
 
-    if(file.exists()) {
+            viewHolder.getImageView().setImageURI(Uri.fromFile(file));
+            viewHolder.getImageView().setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    listener.click(position);
+                }
+            });
 
 
+        }
 
 
-        viewHolder.getImageView().setImageURI(Uri.fromFile(file));
     }
-    }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
@@ -88,4 +99,6 @@ public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder> 
     public void onAttachedToRecyclerView(RecyclerView recyclerView){
         super.onAttachedToRecyclerView(recyclerView);
     }
+
+
 }

@@ -16,6 +16,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+        <Button
+            android:id="@+id/BackButton"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            tools:layout_editor_absoluteX="2dp"
+            tools:layout_editor_absoluteY="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
         <TextView
             android:id="@+id/albumNameTextView"
             android:layout_width="wrap_content"
@@ -23,6 +38,36 @@
             android:text="Album Name"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/RenameAlbumButton"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:text="Rename album"
+            tools:layout_editor_absoluteX="170dp"
+            tools:layout_editor_absoluteY="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  "
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/DeleteAlbumButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Delete album"
+            tools:layout_editor_absoluteX="170dp"
+            tools:layout_editor_absoluteY="4dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -52,6 +97,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

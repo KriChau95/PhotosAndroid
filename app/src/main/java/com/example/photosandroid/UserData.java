@@ -19,54 +19,59 @@ public class UserData implements Serializable {
     private ArrayList<Album> albumList;
     private final static String USERS_FILE = "userdata4.ser";
 
+    private static UserData userdata;
+
+
+
     public ArrayList<Album> getAlbumList() {
         return albumList;
-    }
-
-    public boolean hasAlbum(String name){
-        for (Album a: albumList){
-            if (a.getName().equals(name)){
-                return true;
-            }
-        }
-        return false;
     }
 
     public void addAlbum(Album a) {
         albumList.add(a);
     }
 
-    public UserData() {
-        albumList = new ArrayList<>();
+    public void deleteAlbum(int index){
+        albumList.remove(index);
     }
 
-    public static void store(UserData userData, Context context) {
+    private UserData(Context context) {
+
+        albumList = new ArrayList<>();
+        load(context);
+    }
+
+    public static UserData getUserdata(Context context){
+        if (userdata ==null){
+            userdata = new UserData(context);
+            userdata = load(context);
+        }
+        return userdata;
+    }
+
+    public static void store( Context context) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(context.openFileOutput(USERS_FILE, Context.MODE_PRIVATE));
-            oos.writeObject(userData);
+            oos.writeObject(userdata);
             oos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Loads UserData from a file. If the file does not exist, a new UserData object is created and stored.
-     *
-     * @return The loaded or newly created UserData object.
-     */
-    public static UserData load(Context context) {
-        UserData userData = null;
+
+    public static synchronized UserData load(Context context) {
+
         try {
             FileInputStream fileStream = context.openFileInput(USERS_FILE);
             ObjectInputStream ois = new ObjectInputStream(fileStream);
             Object object = ois.readObject();
-            userData = (UserData) object;
+            userdata = (UserData) object;
             ois.close();
         } catch (Exception e) {
-            userData = new UserData();
-            store(userData, context);
+            userdata = new UserData(context);
+            store(context);
         }
-        return userData;
+    return userdata;
     }
 }
