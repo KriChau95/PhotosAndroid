@@ -31,25 +31,29 @@ public class UserData implements Serializable {
         albumList.add(a);
     }
 
+
     public void deleteAlbum(int index){
         albumList.remove(index);
     }
 
-    private UserData(Context context) {
+    private UserData() {
 
         albumList = new ArrayList<>();
-        load(context);
+
     }
 
-    public static UserData getUserdata(Context context){
+    public static  UserData getUserdata(Context context){
         if (userdata ==null){
-            userdata = new UserData(context);
-            userdata = load(context);
+              userdata = new UserData();
+              userdata = load(context);
+
         }
         return userdata;
     }
 
-    public static void store( Context context) {
+
+    public static synchronized void store( Context context) {
+
         try {
             ObjectOutputStream oos = new ObjectOutputStream(context.openFileOutput(USERS_FILE, Context.MODE_PRIVATE));
             oos.writeObject(userdata);
@@ -69,9 +73,11 @@ public class UserData implements Serializable {
             userdata = (UserData) object;
             ois.close();
         } catch (Exception e) {
-            userdata = new UserData(context);
+            userdata = new UserData();
             store(context);
         }
+
     return userdata;
+
     }
 }

@@ -1,6 +1,8 @@
 package com.example.photosandroid;
 
+
 import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,49 +18,71 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 
 public class photoViewActivity  extends AppCompatActivity {
-    private  UserData userData;
-    Album currAlbum;
-    Photo currPhoto;
 
-    ImageView imageView;
+     private  UserData userData;
+     Album currAlbum;
+     Photo currPhoto;
+     
+     ImageView imageView;
+     
+     TextView captionView;
+     private int currPhotoIndex;
 
-    TextView captionView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_view);
         //get data from previous activity
-        userData= UserData.getUserdata(getApplicationContext());
-        currAlbum =(Album)userData.getAlbumList().get((int)getIntent().getSerializableExtra("albumPos"));
-        currPhoto=currAlbum.getPhoto((int)getIntent().getSerializableExtra("photoPos"));
-        int currAlbumIndex = (int)getIntent().getSerializableExtra("albumPos");
-        int currPhotoIndex = (int)getIntent().getSerializableExtra("photoPos");
+
+        userData = UserData.getUserdata(getApplicationContext());
+
+        currPhotoIndex = (int) getIntent().getSerializableExtra("photoPos");
+        int currAlbumIndex = (int) getIntent().getSerializableExtra("albumPos");
+        currAlbum = (Album) userData.getAlbumList().get(currAlbumIndex);
+        currPhoto = currAlbum.getPhoto(currPhotoIndex);
+
 
         //declare changeable fields
-        imageView=findViewById(R.id.imageView);
-        captionView=findViewById(R.id.captionView);
+        imageView = findViewById(R.id.imageView);
+        captionView = findViewById(R.id.captionView);
         //set button action
-        findViewById(R.id.CaptionButton).setOnClickListener((x)->editCaption());
-        findViewById(R.id.TagsButton).setOnClickListener((x)->promptEditTags(currAlbumIndex, currPhotoIndex));
-        findViewById(R.id.deleteButton).setOnClickListener((x)->deletePhoto());
-        findViewById(R.id.changeAlbumButton).setOnClickListener((x)->promptSelectAlbum());
-        findViewById(R.id.rightButton).setOnClickListener((x)->nextPhoto());
-        findViewById(R.id.leftButton).setOnClickListener((x)->previousPhoto());
+        findViewById(R.id.CaptionButton).setOnClickListener((x) -> editCaption());
+
+        findViewById(R.id.TagsButton).setOnClickListener((x) -> promptEditTags(currAlbumIndex, currPhotoIndex));
+
+        findViewById(R.id.deleteButton).setOnClickListener((x) -> deletePhoto());
+        findViewById(R.id.changeAlbumButton).setOnClickListener((x) -> promptSelectAlbum());
+        findViewById(R.id.rightButton).setOnClickListener((x) -> nextPhoto());
+        findViewById(R.id.leftButton).setOnClickListener((x) -> previousPhoto());
         //set image view caption and album name
-        TextView albumNameView=(TextView)findViewById(R.id.albumNameTextView);
+        TextView albumNameView = (TextView) findViewById(R.id.albumNameTextView);
         albumNameView.setText(currAlbum.getName());
 
         captionView.setText(currPhoto.getCaption());
 
         imageView.setImageURI(Uri.fromFile(new File(currPhoto.getFilePath())));
-
     }
 
     private void previousPhoto() {
+        if (currPhotoIndex-1<0) {
+            currPhotoIndex=currAlbum.getSize();
+        }else{
+            currPhotoIndex-=1;
+        }
+        updateActivity();
+
 
     }
 
     private void nextPhoto() {
+
+        if (currPhotoIndex+1>=currAlbum.getSize()) {
+        currPhotoIndex=0;
+        }else{
+            currPhotoIndex+=1;
+        }
+        updateActivity();
+
     }
 
     private void promptSelectAlbum() {
@@ -77,11 +101,13 @@ public class photoViewActivity  extends AppCompatActivity {
         }
     }
 
+
     private void promptEditTags(int albumIndex, int photoIndex) {
         Intent intent = new Intent(this,TagActivity.class);
         intent.putExtra("albumPos",albumIndex);
         intent.putExtra("photoPos",photoIndex);
         startActivity(intent);
+
     }
 
     private void editCaption() {
@@ -110,4 +136,13 @@ public class photoViewActivity  extends AppCompatActivity {
 
         builder.show();
     }
+
+   private void updateActivity(){
+        currPhoto=currAlbum.getPhoto(currPhotoIndex);
+       captionView.setText(currPhoto.getCaption());
+
+       imageView.setImageURI(Uri.fromFile(new File(currPhoto.getFilePath())));
+
+    }
+
 }

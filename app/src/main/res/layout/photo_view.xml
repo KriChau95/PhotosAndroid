@@ -39,12 +39,14 @@
 
     <TextView
         android:id="@+id/captionView"
+
         android:layout_width="376dp"
         android:layout_height="114dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
@@ -95,27 +97,26 @@
         android:id="@+id/leftButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
 
         android:text="previous"
-        app:layout_constraintBottom_toTopOf="@+id/CaptionButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightButton"
+        app:layout_constraintBottom_toTopOf="@+id/deleteButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/captionView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.26" />
+
 
     <Button
         android:id="@+id/rightButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
 
-        android:layout_marginEnd="96dp"
         android:text="next"
-        app:layout_constraintBottom_toTopOf="@+id/changeAlbumButton"
+        app:layout_constraintBottom_toTopOf="@+id/TagsButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/captionView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.26"
+        />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
