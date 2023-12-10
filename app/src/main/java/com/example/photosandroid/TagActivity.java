@@ -63,12 +63,31 @@ public class TagActivity extends AppCompatActivity {
         findViewById(R.id.floatingActionButton).setOnClickListener(view -> AddTagDialog());
         findViewById(R.id.BackButton).setOnClickListener(view -> back());
 
-//        listView.setOnItemClickListener(
-//                (p, v, pos, id) -> openTag(pos)
-//        );
+        listView.setOnItemClickListener(
+                (p, v, pos, id) -> askToDeleteTag(pos)
+        );
 
 
 
+    }
+
+    public void askToDeleteTag(int pos) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Tag");
+        builder.setMessage("Do you want to delete this tag?");
+        builder.setPositiveButton("Delete", (dialog, which) -> {
+            deleteTag(pos);
+            dialog.dismiss();
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+
+    private void deleteTag(int pos) {
+        Tag tagToRemove = tags.get(pos);
+        currPhoto.removeTag(tagToRemove);
+        UserData.store(getApplicationContext());
+        updateListView();
     }
     private void AddTagDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#00ff00"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <Button
+            android:id="@+id/BackButton"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="      Search By Tags"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <AutoCompleteTextView
+        android:id="@+id/Tag1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="AutoCompleteTextView 1"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/Tag2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="AutoCompleteTextView 2"
+        app:layout_constraintTop_toBottomOf="@+id/Tag1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <Button
+        android:id="@+id/SearchTag1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Search Tag 1"
+        app:layout_constraintTop_toBottomOf="@+id/Tag2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <Button
+        android:id="@+id/SearchTagOR"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Search Tag 1 OR Tag 2"
+        app:layout_constraintTop_toBottomOf="@+id/SearchTag1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <Button
+        android:id="@+id/SearchTagAND"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Search Tag 1 AND Tag 2"
+        app:layout_constraintTop_toBottomOf="@+id/SearchTagOR"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
