@@ -157,9 +157,5 @@ public class photoViewActivity  extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        previousPhoto();
-    }
+    
 }
