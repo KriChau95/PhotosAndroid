@@ -2,15 +2,13 @@ package com.example.photosandroid;
 
 import static com.example.photosandroid.R.id.*;
 
-import android.Manifest;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,16 +16,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class AlbumViewActivity extends AppCompatActivity {
     private Album currAlbum;
@@ -35,14 +35,31 @@ public class AlbumViewActivity extends AppCompatActivity {
 
     private  UserData userData;
 
-
+    private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.album_view);
+    ////////////////////////////////////////////////////////
 
+        pickMedia =
+                registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+                    // Callback is invoked after the user selects a media item or closes the
+                    // photo picker.
+                    if (uri != null) {
+                        String photoPath =getRealPathFromURI(uri,this);
+                        File file = new File(photoPath);
+                        currAlbum.addPhoto(new Photo(file));
 
+                        UserData.store(getApplicationContext());
+                        adaptor.notifyItemInserted(currAlbum.getSize()-1);
 
+                    } else {
+                        Toast.makeText(this,"no photo selected",Toast.LENGTH_LONG).show();
+                    }
+                });
+
+    /////////////////////////////////////////////////////////
         //read in the current album
         userData= UserData.getUserdata(getApplicationContext());
 
@@ -83,13 +100,15 @@ public class AlbumViewActivity extends AppCompatActivity {
     }
 
     private void addImage(){
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent,3);
+
+        pickMedia.launch(new PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                .build());
+
 
     }
 
-
-    @Override
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data!=null && resultCode == RESULT_OK) {
@@ -104,7 +123,7 @@ public class AlbumViewActivity extends AppCompatActivity {
             adaptor.notifyItemInserted(currAlbum.getSize()-1);
 
         }
-    }
+    }*/
 
     public void deleteAlbum(){
         for (int i = userData.getAlbumList().size() - 1; i >= 0; i--){
