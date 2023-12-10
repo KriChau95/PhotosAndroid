@@ -100,6 +100,7 @@ public class photoViewActivity  extends AppCompatActivity {
             finish();
         }else{
             currAlbum.getPhotos().remove(currPhoto);
+            UserData.store(getApplicationContext());
             previousPhoto();
 
         }

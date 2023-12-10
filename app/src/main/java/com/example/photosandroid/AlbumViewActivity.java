@@ -54,6 +54,7 @@ public class AlbumViewActivity extends AppCompatActivity {
                         UserData.store(getApplicationContext());
                         adaptor.notifyItemInserted(currAlbum.getSize()-1);
 
+
                     } else {
                         Toast.makeText(this,"no photo selected",Toast.LENGTH_LONG).show();
                     }
