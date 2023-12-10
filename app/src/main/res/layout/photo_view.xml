@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-
+        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
@@ -63,7 +63,7 @@
         android:id="@+id/changeAlbumButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="28dp"
         android:layout_marginBottom="4dp"
         android:text="Move"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,8 +75,6 @@
         android:layout_height="wrap_content"
 
 
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="4dp"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -87,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
         android:layout_marginBottom="4dp"
-        android:text="Edit Tags"
+        android:text="Tags"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -114,9 +112,7 @@
         app:layout_constraintBottom_toTopOf="@+id/TagsButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.26"
-        />
-
+        app:layout_constraintVertical_bias="0.26" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
