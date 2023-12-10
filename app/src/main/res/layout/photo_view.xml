@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="383dp"
-        android:layout_height="424dp"
+        android:layout_width="384dp"
+        android:layout_height="372dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
@@ -40,8 +40,8 @@
     <TextView
         android:id="@+id/captionView"
 
-        android:layout_width="376dp"
-        android:layout_height="114dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
