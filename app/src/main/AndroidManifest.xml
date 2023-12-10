@@ -23,6 +23,10 @@
             android:name=".AlbumViewActivity"
             android:exported="false"
             android:parentActivityName="com.example.photosandroid.MainActivity"/>
+        <activity
+        android:name=".SelectAlbumActivity"
+        android:exported="false"
+        android:parentActivityName="com.example.photosandroid.MainActivity"/>
 
         <activity
             android:name=".SearchActivity"
