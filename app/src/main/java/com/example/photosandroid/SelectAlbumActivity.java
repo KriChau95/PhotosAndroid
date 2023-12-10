@@ -55,6 +55,7 @@ public class SelectAlbumActivity extends AppCompatActivity {
         }
         currAlbum.getPhotos().remove(photo);
         myAlbums.get(index).addPhoto(photo);
+        UserData.store(getApplicationContext());
         finish();
     }
 }

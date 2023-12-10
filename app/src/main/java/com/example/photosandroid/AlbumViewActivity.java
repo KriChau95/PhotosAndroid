@@ -47,12 +47,6 @@ public class AlbumViewActivity extends AppCompatActivity {
                     // Callback is invoked after the user selects a media item or closes the
                     // photo picker.
                     if (uri != null) {
-                        String photoPath =getRealPathFromURI(uri,this);
-                        File file = new File(photoPath);
-                        currAlbum.addPhoto(new Photo(file));
-
-                        UserData.store(getApplicationContext());
-                        adaptor.notifyItemInserted(currAlbum.getSize()-1);
 
 
                     } else {
@@ -105,11 +99,11 @@ public class AlbumViewActivity extends AppCompatActivity {
         pickMedia.launch(new PickVisualMediaRequest.Builder()
                 .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                 .build());
-
+UserData.store(getApplicationContext());
 
     }
 
-   /* @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data!=null && resultCode == RESULT_OK) {
@@ -124,7 +118,7 @@ public class AlbumViewActivity extends AppCompatActivity {
             adaptor.notifyItemInserted(currAlbum.getSize()-1);
 
         }
-    }*/
+    }
 
     public void deleteAlbum(){
         for (int i = userData.getAlbumList().size() - 1; i >= 0; i--){
