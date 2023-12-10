@@ -28,16 +28,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imageList"
-        android:layout_width="403dp"
-        android:layout_height="661dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="387dp"
+        android:layout_height="513dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

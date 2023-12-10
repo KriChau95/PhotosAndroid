@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Album> myAlbums;
     private ArrayAdapter<String> adapter;
 
-    private  UserData userData;
+    private  UserData userData=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -29,8 +29,9 @@ public class photoViewActivity  extends AppCompatActivity {
         setContentView(R.layout.photo_view);
         //get data from previous activity
         userData= UserData.getUserdata(getApplicationContext());
+        currPhotoIndex=(int)getIntent().getSerializableExtra("photoPos");
         currAlbum =(Album)userData.getAlbumList().get((int)getIntent().getSerializableExtra("albumPos"));
-        currPhoto=currAlbum.getPhoto((int)getIntent().getSerializableExtra("photoPos"));
+        currPhoto=currAlbum.getPhoto(currPhotoIndex);
         //declare changeable fields
         imageView=findViewById(R.id.imageView);
         captionView=findViewById(R.id.captionView);
@@ -52,10 +53,22 @@ public class photoViewActivity  extends AppCompatActivity {
     }
 
     private void previousPhoto() {
+        if (currPhotoIndex-1<0) {
+            currPhotoIndex=currAlbum.getSize();
+        }else{
+            currPhotoIndex-=1;
+        }
+        updateActivity();
 
     }
 
     private void nextPhoto() {
+        if (currPhotoIndex+1>=currAlbum.getSize()) {
+        currPhotoIndex=0;
+        }else{
+            currPhotoIndex+=1;
+        }
+        updateActivity();
     }
 
     private void promptSelectAlbum() {
@@ -102,5 +115,13 @@ public class photoViewActivity  extends AppCompatActivity {
         });
 
         builder.show();
+    }
+
+   private void updateActivity(){
+        currPhoto=currAlbum.getPhoto(currPhotoIndex);
+       captionView.setText(currPhoto.getCaption());
+
+       imageView.setImageURI(Uri.fromFile(new File(currPhoto.getFilePath())));
+
     }
 }

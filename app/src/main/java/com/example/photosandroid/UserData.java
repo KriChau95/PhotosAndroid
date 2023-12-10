@@ -34,17 +34,18 @@ public class UserData implements Serializable {
     private UserData(Context context) {
 
         albumList = new ArrayList<>();
-         load(context);
+
     }
 
-    public static UserData getUserdata(Context context){
+    public static  UserData getUserdata(Context context){
         if (userdata ==null){
               userdata = new UserData(context);
+              userdata = load(context);
         }
         return userdata;
     }
 
-    public static void store( Context context) {
+    public static synchronized void store( Context context) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(context.openFileOutput(USERS_FILE, Context.MODE_PRIVATE));
             oos.writeObject(userdata);
@@ -55,7 +56,7 @@ public class UserData implements Serializable {
     }
 
 
-    public static void load(Context context) {
+    public static synchronized UserData load(Context context) {
 
         try {
             FileInputStream fileStream = context.openFileInput(USERS_FILE);
@@ -67,6 +68,6 @@ public class UserData implements Serializable {
             userdata = new UserData(context);
             store(context);
         }
-
+return userdata;
     }
 }
