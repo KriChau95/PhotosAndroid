@@ -17,12 +17,15 @@ public class SelectAlbumActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> adapter;
     Album currAlbum;
+
+    Photo photo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setContentView(R.layout.album_select);
         userData= UserData.getUserdata(getApplicationContext());
-
+        currAlbum = userData.getAlbumList().get((int) getIntent().getSerializableExtra("albumPos"));
+        photo=currAlbum.getPhoto((int) getIntent().getSerializableExtra("photoPos"));
 
         if (albumList == null || albumList.isEmpty()) {
             albumList = new ArrayList<>();
@@ -30,15 +33,12 @@ public class SelectAlbumActivity extends AppCompatActivity {
             for (Album a : myAlbums) {
                 albumList.add(a.getName());
             }
-            albumList.remove(currAlbum.getName());
-            if(albumList.size()<1) {
-                Toast.makeText(this, "no other Albums exist", Toast.LENGTH_LONG).show();
-            }
+
         }
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, albumList);
 
-        ListView listView = findViewById(R.id.listview);
+        ListView listView = findViewById(R.id.SelectAlbumlistview);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(
@@ -49,6 +49,12 @@ public class SelectAlbumActivity extends AppCompatActivity {
     }
 
     private void moveAlbum(int index){
+        if(myAlbums.get(index).equals(currAlbum)){
+            Toast.makeText(this, "photo is already in this album", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        currAlbum.getPhotos().remove(photo);
+        myAlbums.get(index).addPhoto(photo);
         finish();
     }
 }

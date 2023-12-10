@@ -51,7 +51,7 @@ public class photoViewActivity  extends AppCompatActivity {
         findViewById(R.id.TagsButton).setOnClickListener((x) -> promptEditTags(currAlbumIndex, currPhotoIndex));
 
         findViewById(R.id.deleteButton).setOnClickListener((x) -> deletePhoto());
-        findViewById(R.id.changeAlbumButton).setOnClickListener((x) -> promptSelectAlbum());
+        findViewById(R.id.changeAlbumButton).setOnClickListener((x) -> promptSelectAlbum(currAlbumIndex));
         findViewById(R.id.rightButton).setOnClickListener((x) -> nextPhoto());
         findViewById(R.id.leftButton).setOnClickListener((x) -> previousPhoto());
         //set image view caption and album name
@@ -65,7 +65,7 @@ public class photoViewActivity  extends AppCompatActivity {
 
     private void previousPhoto() {
         if (currPhotoIndex-1<0) {
-            currPhotoIndex=currAlbum.getSize();
+            finish();
         }else{
             currPhotoIndex-=1;
         }
@@ -85,7 +85,11 @@ public class photoViewActivity  extends AppCompatActivity {
 
     }
 
-    private void promptSelectAlbum() {
+    private void promptSelectAlbum(int albumIndex) {
+        Intent intent= new Intent(this,SelectAlbumActivity.class);
+        intent.putExtra("albumPos",albumIndex);
+        intent.putExtra("photoPos",currPhotoIndex);
+        startActivity(intent);
     }
 
     private void deletePhoto() {
@@ -145,4 +149,9 @@ public class photoViewActivity  extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        previousPhoto();
+    }
 }
