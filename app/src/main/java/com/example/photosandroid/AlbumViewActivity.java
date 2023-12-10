@@ -105,7 +105,7 @@ public class AlbumViewActivity extends AppCompatActivity {
         pickMedia.launch(new PickVisualMediaRequest.Builder()
                 .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                 .build());
-
+        UserData.store(getApplicationContext());
 
     }
 

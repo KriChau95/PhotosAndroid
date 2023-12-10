@@ -21,8 +21,6 @@ public class UserData implements Serializable {
 
     private static UserData userdata;
 
-
-
     public ArrayList<Album> getAlbumList() {
         return albumList;
     }
