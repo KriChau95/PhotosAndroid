@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(this, "data List Length: " + userData.getAlbumList().size(), Toast.LENGTH_SHORT).show();
-
         for (Album a : myAlbums) {
             System.out.println(a);
         }

@@ -36,13 +36,25 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id = "@+id/SearchInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter tags in format &quot;person/location:value&quot;"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+
+        android:textSize="18sp" />
+
 
     <AutoCompleteTextView
         android:id="@+id/Tag1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="AutoCompleteTextView 1"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        android:hint="Tag 1"
+        app:layout_constraintTop_toBottomOf="@+id/SearchInstructions"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
@@ -53,7 +65,7 @@
         android:id="@+id/Tag2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="AutoCompleteTextView 2"
+        android:hint="Tag 2"
         app:layout_constraintTop_toBottomOf="@+id/Tag1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

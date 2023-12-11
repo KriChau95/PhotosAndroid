@@ -73,7 +73,7 @@ public class photoViewActivity  extends AppCompatActivity {
     }
     private void previousPhoto() {
         if (currPhotoIndex-1<0) {
-            finish();
+            back();
         }else{
             currPhotoIndex-=1;
         }

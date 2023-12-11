@@ -1,5 +1,6 @@
 package com.example.photosandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -16,6 +17,8 @@ public class SelectAlbumActivity extends AppCompatActivity {
     private ArrayList<String> albumList;
 
     private ArrayAdapter<String> adapter;
+
+    private int currAlbumIndex;
     Album currAlbum;
 
     Photo photo;
@@ -26,7 +29,7 @@ public class SelectAlbumActivity extends AppCompatActivity {
         userData= UserData.getUserdata(getApplicationContext());
         currAlbum = userData.getAlbumList().get((int) getIntent().getSerializableExtra("albumPos"));
         photo=currAlbum.getPhoto((int) getIntent().getSerializableExtra("photoPos"));
-
+        currAlbumIndex = (int) getIntent().getSerializableExtra("albumPos");
         if (albumList == null || albumList.isEmpty()) {
             albumList = new ArrayList<>();
             myAlbums = userData.getAlbumList();
@@ -56,6 +59,8 @@ public class SelectAlbumActivity extends AppCompatActivity {
         currAlbum.getPhotos().remove(photo);
         myAlbums.get(index).addPhoto(photo);
         UserData.store(getApplicationContext());
-        finish();
+        Intent intent= new Intent(this,AlbumViewActivity.class);
+        intent.putExtra("albumPos",currAlbumIndex);
+        startActivity(intent);
     }
 }
