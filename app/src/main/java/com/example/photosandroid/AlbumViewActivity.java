@@ -109,6 +109,8 @@ UserData.store(getApplicationContext());
         if (data!=null && resultCode == RESULT_OK) {
 
             Uri photo = data.getData();
+
+
             String picturePath=getRealPathFromURI(photo,this);
             File file = new File(picturePath);
             currAlbum.addPhoto(new Photo(file));
