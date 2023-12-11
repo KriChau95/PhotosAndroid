@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -36,25 +38,15 @@ public class AlbumViewActivity extends AppCompatActivity {
     private  UserData userData;
 
     private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
+    Bitmap bmp;
+    SharedPreferences sp;
+    public static final int PERMISSION_REQUEST_CAMERA = 1;
+    private static final int PICK_FROM_GALLERY = 1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.album_view);
-    ////////////////////////////////////////////////////////
 
-        pickMedia =
-                registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
-                    // Callback is invoked after the user selects a media item or closes the
-                    // photo picker.
-                    if (uri != null) {
-
-
-                    } else {
-                        Toast.makeText(this,"no photo selected",Toast.LENGTH_LONG).show();
-                    }
-                });
-
-    /////////////////////////////////////////////////////////
         //read in the current album
         userData= UserData.getUserdata(getApplicationContext());
 
@@ -95,11 +87,8 @@ public class AlbumViewActivity extends AppCompatActivity {
 
     private void addImage(){
 
-        pickMedia.launch(new PickVisualMediaRequest.Builder()
-                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                .build());
-        UserData.store(getApplicationContext());
-
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent,3);
     }
 
     @Override

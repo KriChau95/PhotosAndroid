@@ -78,7 +78,7 @@
         android:id="@+id/changeAlbumButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="4dp"
         android:text="Move"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,7 +103,7 @@
         android:text="Tags"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+
         app:layout_constraintStart_toEndOf="@+id/changeAlbumButton" />
 
     <Button
