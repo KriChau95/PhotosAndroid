@@ -28,6 +28,8 @@ public class photoViewActivity  extends AppCompatActivity {
      TextView captionView;
      private int currPhotoIndex;
 
+     int currAlbumIndex;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,7 @@ public class photoViewActivity  extends AppCompatActivity {
         userData = UserData.getUserdata(getApplicationContext());
 
         currPhotoIndex = (int) getIntent().getSerializableExtra("photoPos");
-        int currAlbumIndex = (int) getIntent().getSerializableExtra("albumPos");
+        currAlbumIndex = (int) getIntent().getSerializableExtra("albumPos");
         currAlbum = (Album) userData.getAlbumList().get(currAlbumIndex);
         currPhoto = currAlbum.getPhoto(currPhotoIndex);
 
@@ -54,6 +56,7 @@ public class photoViewActivity  extends AppCompatActivity {
         findViewById(R.id.changeAlbumButton).setOnClickListener((x) -> promptSelectAlbum(currAlbumIndex));
         findViewById(R.id.rightButton).setOnClickListener((x) -> nextPhoto());
         findViewById(R.id.leftButton).setOnClickListener((x) -> previousPhoto());
+        findViewById(R.id.BackButton).setOnClickListener((x) -> back());
         //set image view caption and album name
         TextView albumNameView = (TextView) findViewById(R.id.albumNameTextView);
         albumNameView.setText(currAlbum.getName());
@@ -63,6 +66,11 @@ public class photoViewActivity  extends AppCompatActivity {
         imageView.setImageURI(Uri.fromFile(new File(currPhoto.getFilePath())));
     }
 
+    private void back(){
+        Intent intent= new Intent(this,AlbumViewActivity.class);
+        intent.putExtra("albumPos",currAlbumIndex);
+        startActivity(intent);
+    }
     private void previousPhoto() {
         if (currPhotoIndex-1<0) {
             finish();
@@ -70,7 +78,6 @@ public class photoViewActivity  extends AppCompatActivity {
             currPhotoIndex-=1;
         }
         updateActivity();
-
 
     }
 

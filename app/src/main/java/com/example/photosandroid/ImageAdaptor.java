@@ -2,6 +2,7 @@ package com.example.photosandroid;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -81,7 +83,6 @@ public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ViewHolder> 
                     listener.click(position);
                 }
             });
-
 
         }
 

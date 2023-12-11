@@ -77,8 +77,6 @@ public class AlbumViewActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(imageList);
 
-
-
         adaptor = new ImageAdaptor(currAlbum.getPhotoList(),new ClickListener(){
 
         //set click listener for items in recycler view
@@ -90,6 +88,7 @@ public class AlbumViewActivity extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(adaptor);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(AlbumViewActivity.this));
 
     }
@@ -99,7 +98,7 @@ public class AlbumViewActivity extends AppCompatActivity {
         pickMedia.launch(new PickVisualMediaRequest.Builder()
                 .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                 .build());
-UserData.store(getApplicationContext());
+        UserData.store(getApplicationContext());
 
     }
 
