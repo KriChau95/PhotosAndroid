@@ -43,6 +43,8 @@ public class AlbumViewActivity extends AppCompatActivity {
     public static final int PERMISSION_REQUEST_CAMERA = 1;
     private static final int PICK_FROM_GALLERY = 1;
 
+    private int currAlbumIndex;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.album_view);
@@ -51,9 +53,8 @@ public class AlbumViewActivity extends AppCompatActivity {
         userData= UserData.getUserdata(getApplicationContext());
 
 
-
         currAlbum = userData.getAlbumList().get((int) getIntent().getSerializableExtra("albumPos"));
-
+        currAlbumIndex = (int) getIntent().getSerializableExtra("albumPos");
 
         //set title for view
         TextView albumNameView = findViewById(albumNameTextView);
@@ -188,7 +189,7 @@ public class AlbumViewActivity extends AppCompatActivity {
     }
     private void switchToPhotoView(int i){
         Intent intent = new Intent(this,photoViewActivity.class);
-        intent.putExtra("albumPos",currAlbum.getCurrentIndex());
+        intent.putExtra("albumPos",currAlbumIndex);
 
         intent.putExtra("photoPos",i);
         startActivity(intent);
