@@ -3,6 +3,8 @@ package com.example.photosandroid;
 
 import android.content.Intent;
 
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.Manifest;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 
 import java.util.ArrayList;
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
 
     private  UserData userData;
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +70,13 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(
                 (p, v, pos, id) -> openAlbum(pos)
         );
-        
+
+        // Check if the permission is already granted
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted, so request it
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_MEDIA_IMAGES}, 69);
+        }
+
     }
 
     private void searchPage(){
@@ -114,5 +127,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("albumPos",pos);
         startActivity(intent);
     }
+
+
 
 }
