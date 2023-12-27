@@ -7,11 +7,21 @@ import android.os.Build;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+/**
+ * The {@code PermissionsManager} class is a helper class for managing permissions in the application
+ * <p>
+ * @author Krishaan Chaudhary & Joshua Clayton
+ */
 public class PermissionsManager {
 
     private static final int REQUEST_PERMISSION_CODE = 123;
 
-    // Function to check if permissions are granted
+    /**
+     * Checks if the necessary permissions are granted.
+     *
+     * @param activity The activity requesting the permissions.
+     * @return True if all required permissions are granted, false otherwise.
+     */
     public static boolean checkPermissions(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // Permission granted for read and write external storage
@@ -34,7 +44,13 @@ public class PermissionsManager {
         return true;
     }
 
-    // Function to handle permission request results
+    /**
+     * Handles the result of permission requests.
+     *
+     * @param requestCode  The request code passed to requestPermissions().
+     * @param permissions  The requested permissions.
+     * @param grantResults The grant results for the corresponding permissions.
+     */
     public static void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_PERMISSION_CODE) {
             // Check if all permissions are granted
