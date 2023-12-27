@@ -10,18 +10,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+/**
+ * The {@code SelectAlbumActivity} class is an activity class allowing the user to select an album to move a photo to.
+ * <p>
+ * @author Krishaan Chaudhary & Joshua Clayton
+ */
 public class SelectAlbumActivity extends AppCompatActivity {
 
     private UserData userData;
     private ArrayList<Album> myAlbums;
     private ArrayList<String> albumList;
-
     private ArrayAdapter<String> adapter;
-
     private int currAlbumIndex;
     Album currAlbum;
-
     Photo photo;
+
+    /**
+     * Called when the activity is first created. Initializes the UI and sets up event listeners.
+     *
+     * @param savedInstanceState The saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +59,11 @@ public class SelectAlbumActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Move the photo to the selected album.
+     *
+     * @param index The index of the selected album.
+     */
     private void moveAlbum(int index){
         if(myAlbums.get(index).equals(currAlbum)){
             Toast.makeText(this, "photo is already in this album", Toast.LENGTH_SHORT).show();
