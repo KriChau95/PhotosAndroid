@@ -1,25 +1,21 @@
 package com.example.photosandroid;
 
-
 import android.content.Intent;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
 import java.util.ArrayList;
 
+/**
+ * The {@code SearchActivity} class is an activity class for searching for photos by tag.
+ * <p>
+ * @author Krishaan Chaudhary & Joshua Clayton
+ */
 public class SearchActivity extends AppCompatActivity {
 
     private ArrayList<String> tagList;
@@ -32,7 +28,11 @@ public class SearchActivity extends AppCompatActivity {
     Album currAlbum;
     Photo currPhoto;
 
-    private String[] test = new String[]{"Apple", "apP", "pear", "PE", "Ball", "bALling"};
+    /**
+     * Called when the activity is first created. Initializes the UI and sets up event listeners.
+     *
+     * @param savedInstanceState The saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,7 @@ public class SearchActivity extends AppCompatActivity {
         userData= UserData.getUserdata(getApplicationContext());
         myAlbums = userData.getAlbumList();
 
+        // an ArrayList to keep track of all tags set so far; useful for autocompleting search
         ArrayList<String> allTags = new ArrayList<String>();
 
         for (Album a : userData.getAlbumList()){
@@ -68,40 +69,19 @@ public class SearchActivity extends AppCompatActivity {
 
         tag1.setAdapter(adapter);
         tag2.setAdapter(adapter);
-//        userData= UserData.getUserdata(getApplicationContext());
-//        currAlbum =(Album)userData.getAlbumList().get((int)getIntent().getSerializableExtra("albumPos"));
-//        currPhoto=currAlbum.getPhoto((int)getIntent().getSerializableExtra("photoPos"));
-//        albumIndex = (int)getIntent().getSerializableExtra("albumPos");
-//        photoIndex = (int)getIntent().getSerializableExtra("photoPos");
-//        tags = currPhoto.getTagList();
-//
-//        ArrayList<String> tagStrings = new ArrayList<String>();
-//        if (tags.size() > 0){
-//            for (Tag t: tags){
-//                tagStrings.add(t.toString());
-//            }
-//        }
-//
-//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tagStrings);
-//
-//        ListView listView = findViewById(R.id.listview);
-//        listView.setAdapter(adapter);
-//
-//        // Floating Action Button Click Listener
-//        findViewById(R.id.floatingActionButton).setOnClickListener(view -> AddTagDialog());
+
         findViewById(R.id.BackButton).setOnClickListener(view -> back());
         findViewById(R.id.SearchTag1).setOnClickListener(view -> searchResults(0));
         findViewById(R.id.SearchTagAND).setOnClickListener(view -> searchResults(1));
         findViewById(R.id.SearchTagOR).setOnClickListener(view -> searchResults(2));
 
-//
-//        listView.setOnItemClickListener(
-//                (p, v, pos, id) -> askToDeleteTag(pos)
-//        );
-//
-
     }
 
+    /**
+     * Perform a search based on the selected tags and display the results.
+     *
+     * @param mode The search mode (0 for Tag 1, 1 for Tag 1 AND Tag 2, 2 for Tag 1 OR Tag 2).
+     */
     public void searchResults(int mode){
         AutoCompleteTextView tag1 = findViewById(R.id.Tag1);
         AutoCompleteTextView tag2 = findViewById(R.id.Tag2);
@@ -187,10 +167,12 @@ public class SearchActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Navigate back to the MainActivity.
+     */
     private void back(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
 
 }
