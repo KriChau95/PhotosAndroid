@@ -1,6 +1,5 @@
 package com.example.photosandroid;
 
-
 import android.content.Intent;
 
 import android.content.pm.PackageManager;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.Manifest;
 
 import androidx.annotation.RequiresApi;
@@ -22,16 +20,25 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-
 import java.util.ArrayList;
 
+/**
+ * The {@code MainActivity} class is an activity class for managing and displaying photo albums
+ * <p>
+ * @author Krishaan Chaudhary & Joshua Clayton
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> albumList;
     private ArrayList<Album> myAlbums;
     private ArrayAdapter<String> adapter;
-
     private  UserData userData;
+
+    /**
+     * Called when the activity is first created. Initializes the UI and sets up event listeners.
+     *
+     * @param savedInstanceState The saved state of the activity.
+     */
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +84,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Navigate to the search activity.
+     */
     private void searchPage(){
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Display a dialog for entering the name of a new album.
+     */
     private void showAlbumNameDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Album Name");
@@ -118,14 +131,15 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
-
+    /**
+     * Open the selected album.
+     *
+     * @param pos The position of the selected album in the list.
+     */
     private void openAlbum(int pos) {
-
         Intent intent = new Intent(this, AlbumViewActivity.class);
         intent.putExtra("albumPos",pos);
         startActivity(intent);
     }
-
-
 
 }
