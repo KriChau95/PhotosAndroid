@@ -1,6 +1,5 @@
 package com.example.photosandroid;
 
-
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -10,15 +9,18 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
 import java.util.ArrayList;
 
+/**
+ * The {@code TagActivity} class is an activity class for adding and editing Tags for a specific Photo.
+ * <p>
+ * @author Krishaan Chaudhary & Joshua Clayton
+ */
 public class TagActivity extends AppCompatActivity {
 
     private ArrayList<String> tagList;
@@ -30,6 +32,12 @@ public class TagActivity extends AppCompatActivity {
     int photoIndex;
     Album currAlbum;
     Photo currPhoto;
+
+    /**
+     * Called when the activity is first created. Initializes the UI and sets up event listeners.
+     *
+     * @param savedInstanceState The saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +75,13 @@ public class TagActivity extends AppCompatActivity {
                 (p, v, pos, id) -> askToDeleteTag(pos)
         );
 
-
-
     }
 
+    /**
+     * Ask the user if they want to delete a tag.
+     *
+     * @param pos The position of the tag in the list.
+     */
     public void askToDeleteTag(int pos) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete Tag");
@@ -83,12 +94,21 @@ public class TagActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Delete a tag at a specific position.
+     *
+     * @param pos The position of the tag to be deleted.
+     */
     private void deleteTag(int pos) {
         Tag tagToRemove = tags.get(pos);
         currPhoto.removeTag(tagToRemove);
         UserData.store(getApplicationContext());
         updateListView();
     }
+
+    /**
+     * Display a dialog for adding a new tag.
+     */
     private void AddTagDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Tag Name");
@@ -142,6 +162,9 @@ public class TagActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Update the list view with the current tags.
+     */
     private void updateListView() {
         tags = currPhoto.getTagList();
 
@@ -155,12 +178,14 @@ public class TagActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Navigate back to the photo view activity.
+     */
     private void back(){
         Intent intent = new Intent(this, photoViewActivity.class);
         intent.putExtra("albumPos",albumIndex);
         intent.putExtra("photoPos",photoIndex);
         startActivity(intent);
     }
-
 
 }
